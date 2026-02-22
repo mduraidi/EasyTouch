@@ -1,6 +1,8 @@
-# EasyTouch-Windows (et)
+# EasyTouch (et)
 
-一个用于 Windows 系统自动化操作的工具，支持鼠标、键盘、屏幕、窗口、系统资源等多种操作。支持 CLI 和 MCP 两种使用方式。
+一个跨平台的系统自动化操作工具，支持鼠标、键盘、屏幕、窗口、系统资源等多种操作。支持 CLI 和 MCP 两种使用方式。
+
+支持平台：Windows、Linux、macOS
 
 ## 功能模块
 
@@ -334,26 +336,75 @@ et --mcp
 
 - **目标框架**: .NET 10
 - **编译方式**: AOT (Ahead-of-Time)
-- **输出文件**: `et.exe` (单文件，自包含)
-- **文件大小**: ~3.9 MB
-- **运行平台**: Windows 10/11 x64
+- **输出文件**: `et` / `et.exe` (单文件，自包含)
+- **文件大小**: ~3-5 MB (取决于平台)
+- **支持平台**: 
+  - Windows 10/11 x64
+  - Linux x64 (测试于 Ubuntu, Debian, CentOS)
+  - macOS x64 / ARM64 (Intel/Apple Silicon)
 
 ## 安装方法
 
 ### 方式一：直接下载
-下载 `et.exe` 文件，放置到系统 PATH 目录或任意位置。
+从 Releases 页面下载对应平台的二进制文件：
+- Windows: `et.exe`
+- Linux: `et`
+- macOS: `et`
+
+放置到系统 PATH 目录或任意位置即可使用。
 
 ### 方式二：从源码编译
 
+**Windows**
 ```bash
 # 克隆仓库
 git clone <repository-url>
-cd tools/EasyTouch/EasyTouch-Windows
+cd EasyTouch/EasyTouch-Windows
 
 # 构建（需要 .NET 10 SDK）
 dotnet publish EasyTouch-Windows.csproj -c Release -r win-x64 --self-contained true -p:PublishAot=true
 
 # 输出文件位于 bin/Release/net10.0/win-x64/publish/et.exe
+```
+
+**Linux**
+```bash
+# 克隆仓库
+git clone <repository-url>
+cd EasyTouch/EasyTouch-Linux
+
+# 构建（需要 .NET 10 SDK）
+dotnet publish EasyTouch-Linux.csproj -c Release -r linux-x64 --self-contained true -p:PublishAot=true
+
+# 输出文件位于 bin/Release/net10.0/linux-x64/publish/et
+# 赋予执行权限
+chmod +x bin/Release/net10.0/linux-x64/publish/et
+```
+
+**macOS**
+```bash
+# 克隆仓库
+git clone <repository-url>
+cd EasyTouch/EasyTouch-Mac
+
+# 构建 Intel 版本（需要 .NET 10 SDK）
+dotnet publish EasyTouch-Mac.csproj -c Release -r osx-x64 --self-contained true -p:PublishAot=true
+
+# 构建 Apple Silicon 版本
+dotnet publish EasyTouch-Mac.csproj -c Release -r osx-arm64 --self-contained true -p:PublishAot=true
+
+# 输出文件位于 bin/Release/net10.0/osx-x64/publish/et 或 bin/Release/net10.0/osx-arm64/publish/et
+# 赋予执行权限
+chmod +x bin/Release/net10.0/osx-x64/publish/et
+```
+
+**一键构建所有平台**
+```bash
+# Windows
+build-all.bat
+
+# Linux / macOS
+./build-all.sh
 ```
 
 ## 集成到 MCP 客户端
@@ -362,6 +413,7 @@ dotnet publish EasyTouch-Windows.csproj -c Release -r win-x64 --self-contained t
 
 在 `claude_desktop_config.json` 中添加：
 
+**Windows**
 ```json
 {
   "mcpServers": {
@@ -373,16 +425,44 @@ dotnet publish EasyTouch-Windows.csproj -c Release -r win-x64 --self-contained t
 }
 ```
 
+**Linux / macOS**
+```json
+{
+  "mcpServers": {
+    "easytouch": {
+      "command": "/path/to/et",
+      "args": ["--mcp"]
+    }
+  }
+}
+```
+
 ### 其他 MCP 客户端
 
-配置命令为 `et.exe`，参数为 `--mcp`，使用 stdio 传输。
+配置命令为 `et`（或 Windows 上的 `et.exe`），参数为 `--mcp`，使用 stdio 传输。
+
+## 平台特定说明
+
+### Windows
+- 所有功能完全支持
+- 部分功能（如操作系统关机、某些窗口操作）可能需要以管理员权限运行
+
+### Linux
+- 需要 X11 显示服务器（不支持 Wayland）
+- 部分功能在某些桌面环境下可能受限
+- 建议运行在有图形界面的环境中
+
+### macOS
+- 需要授予辅助功能权限（系统偏好设置 -> 安全性与隐私 -> 辅助功能）
+- 截图功能需要屏幕录制权限
+- Apple Silicon 版本需要在 Rosetta 2 环境下运行 x64 版本
 
 ## 注意事项
 
-1. **管理员权限**: 部分功能（如操作系统关机、某些窗口操作）可能需要以管理员权限运行
+1. **权限要求**: 部分功能可能需要管理员/root权限或辅助功能权限
 2. **AOT 编译**: 单文件已包含所有依赖，无需安装 .NET 运行时
 3. **安全性**: 该工具可以控制系统，请确保只在受信任的环境中使用
-4. **兼容性**: 仅在 Windows 10/11 x64 上测试通过
+4. **兼容性**: 各平台版本在对应系统上测试通过
 
 ## 许可证
 
