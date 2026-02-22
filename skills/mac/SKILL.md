@@ -1,111 +1,111 @@
 # EasyTouch macOS MCP Skill
 
-## 基本信息
+## Basic Information
 
-- **名称**: EasyTouch macOS Automation
-- **版本**: 1.0.0
-- **描述**: macOS 系统自动化控制工具，支持鼠标、键盘、屏幕、窗口、系统资源等操作
-- **作者**: MaomiAgent Team
-- **许可证**: MIT
+- **Name**: EasyTouch macOS Automation
+- **Version**: 1.0.0
+- **Description**: macOS system automation tool supporting mouse, keyboard, screen, window, and system resource operations
+- **Author**: MaomiAgent Team
+- **License**: MIT
 
-## 支持平台
+## Supported Platforms
 
 - macOS 11 (Big Sur) +
 - macOS 12 (Monterey)
 - macOS 13 (Ventura)
 - macOS 14 (Sonoma)
 - macOS 15 (Sequoia)
-- Intel 和 Apple Silicon (Rosetta 2)
+- Intel and Apple Silicon (Rosetta 2)
 
-## 依赖要求
+## Dependencies
 
-本工具使用 AppleScript 和系统命令，无需额外依赖。
+This tool uses AppleScript and system commands; no additional dependencies are required.
 
-**系统要求**:
-- macOS 11 或更高版本
-- 辅助功能权限（首次使用时系统会提示）
+**System Requirements**:
+- macOS 11 or later
+- Accessibility permission (the system will prompt on first use)
 
-## 功能特性
+## Features
 
-### 1. 鼠标控制
-- 移动鼠标到指定坐标
-- 鼠标点击（左/右/中键，支持双击）
-- 鼠标按下/释放
-- 鼠标滚轮滚动
-- 获取当前鼠标位置
+### 1. Mouse Control
+- Move mouse to specified coordinates
+- Mouse click (left/right/middle button, supports double click)
+- Mouse press/release
+- Mouse wheel scroll
+- Get current mouse position
 
-### 2. 键盘控制
-- 按键按下和释放
-- 组合键操作（⌘+C, ⌥+Tab 等）
-- 文本输入（支持多语言）
-- 模拟人类打字
+### 2. Keyboard Control
+- Key press and release
+- Key combination operations (⌘+C, ⌥+Tab, etc.)
+- Text input (supports multiple languages)
+- Simulated human typing
 
-### 3. 屏幕操作
-- 全屏/区域截图
-- 获取指定像素颜色
-- 列出所有显示器
+### 3. Screen Operations
+- Full screen/region screenshot
+- Get color of a specified pixel
+- List all monitors
 
-### 4. 窗口管理
-- 列出所有窗口
-- 按标题查找窗口
-- 激活窗口
-- 获取前台窗口
+### 4. Window Management
+- List all windows
+- Find window by title
+- Activate window
+- Get foreground window
 
-### 5. 系统信息
-- 获取操作系统信息
-- CPU 信息和使用率
-- 内存使用情况
-- 磁盘信息
-- 进程列表
+### 5. System Information
+- Get operating system information
+- CPU information and usage
+- Memory usage
+- Disk information
+- Process list
 
-### 6. 剪贴板操作
-- 获取/设置剪贴板文本
-- 获取剪贴板文件列表
-- 清空剪贴板
+### 6. Clipboard Operations
+- Get/set clipboard text
+- Get clipboard file list
+- Clear clipboard
 
-### 7. 音频控制
-- 获取/设置系统音量
-- 静音/取消静音
-- 列出音频设备
+### 7. Audio Control
+- Get/set system volume
+- Mute/unmute
+- List audio devices
 
-## 使用方式
+## Usage
 
-### CLI 命令行模式
+### CLI Mode
 
 ```bash
-# 鼠标操作
+# Mouse operations
 et mouse_move --x 100 --y 200
 et mouse_click --button left --double
 et mouse_position
 
-# 键盘操作
+# Keyboard operations
 et key_press --key "command+c"
 et type_text --text "Hello World"
 
-# 截图
+# Screenshot
 et screenshot --output screenshot.png
 et pixel_color --x 100 --y 100
 
-# 窗口管理
+# Window management
 et window_list
 et window_activate --title "Safari"
 
-# 系统信息
+# System information
 et os_info
 et cpu_info
 et memory_info
 et process_list
 
-# 剪贴板
+# Clipboard
 et clipboard_get_text
 et clipboard_set_text --text "Hello"
 
-# 音频
+# Audio
 et volume_set --level 50
 et volume_mute --state true
 ```
 
-### MCP 模式
+### MCP Mode
 
 ```bash
 et --mcp
@@ -113,106 +113,106 @@ et --mcp
 
 ## MCP Tools
 
-| Tool | 描述 | 参数 |
+| Tool | Description | Parameters |
 |------|------|------|
-| `mouse_move` | 移动鼠标 | `x`, `y`, `relative`, `duration` |
-| `mouse_click` | 点击鼠标 | `button`, `double` |
-| `mouse_down` | 鼠标按下 | `button` |
-| `mouse_up` | 鼠标释放 | `button` |
-| `mouse_scroll` | 鼠标滚轮 | `amount`, `horizontal` |
-| `mouse_position` | 获取鼠标位置 | - |
-| `key_press` | 按下按键 | `key` |
-| `key_down` | 按键按下 | `key` |
-| `key_up` | 按键释放 | `key` |
-| `type_text` | 输入文本 | `text`, `interval`, `humanLike` |
-| `screenshot` | 截图 | `x`, `y`, `width`, `height`, `outputPath` |
-| `pixel_color` | 获取像素颜色 | `x`, `y` |
-| `screen_list` | 列出显示器 | - |
-| `window_list` | 列出窗口 | `visibleOnly`, `titleFilter` |
-| `window_find` | 查找窗口 | `title`, `processId` |
-| `window_activate` | 激活窗口 | `handle` |
-| `window_foreground` | 获取前台窗口 | - |
-| `os_info` | 操作系统信息 | - |
-| `cpu_info` | CPU 信息 | - |
-| `memory_info` | 内存信息 | - |
-| `disk_list` | 磁盘列表 | - |
-| `process_list` | 进程列表 | `nameFilter` |
-| `lock_screen` | 锁定屏幕 | - |
-| `clipboard_get_text` | 获取剪贴板文本 | - |
-| `clipboard_set_text` | 设置剪贴板文本 | `text` |
-| `clipboard_clear` | 清空剪贴板 | - |
-| `clipboard_get_files` | 获取剪贴板文件 | - |
-| `volume_get` | 获取音量 | - |
-| `volume_set` | 设置音量 | `level` |
-| `volume_mute` | 静音/取消静音 | `state` |
-| `audio_devices` | 列出音频设备 | - |
+| `mouse_move` | Move mouse | `x`, `y`, `relative`, `duration` |
+| `mouse_click` | Click mouse | `button`, `double` |
+| `mouse_down` | Mouse press | `button` |
+| `mouse_up` | Mouse release | `button` |
+| `mouse_scroll` | Mouse wheel | `amount`, `horizontal` |
+| `mouse_position` | Get mouse position | - |
+| `key_press` | Press key | `key` |
+| `key_down` | Key press | `key` |
+| `key_up` | Key release | `key` |
+| `type_text` | Type text | `text`, `interval`, `humanLike` |
+| `screenshot` | Take screenshot | `x`, `y`, `width`, `height`, `outputPath` |
+| `pixel_color` | Get pixel color | `x`, `y` |
+| `screen_list` | List monitors | - |
+| `window_list` | List windows | `visibleOnly`, `titleFilter` |
+| `window_find` | Find window | `title`, `processId` |
+| `window_activate` | Activate window | `handle` |
+| `window_foreground` | Get foreground window | - |
+| `os_info` | OS information | - |
+| `cpu_info` | CPU information | - |
+| `memory_info` | Memory information | - |
+| `disk_list` | Disk list | - |
+| `process_list` | Process list | `nameFilter` |
+| `lock_screen` | Lock screen | - |
+| `clipboard_get_text` | Get clipboard text | - |
+| `clipboard_set_text` | Set clipboard text | `text` |
+| `clipboard_clear` | Clear clipboard | - |
+| `clipboard_get_files` | Get clipboard files | - |
+| `volume_get` | Get volume | - |
+| `volume_set` | Set volume | `level` |
+| `volume_mute` | Mute/unmute | `state` |
+| `audio_devices` | List audio devices | - |
 
-## 技术规格
+## Technical Specifications
 
-- **目标框架**: .NET 10
-- **编译方式**: AOT (Ahead-of-Time)
-- **输出文件**: `et` (单文件，自包含)
-- **文件大小**: ~4 MB
-- **运行平台**: macOS x64 / arm64
+- **Target Framework**: .NET 10
+- **Compilation**: AOT (Ahead-of-Time)
+- **Output File**: `et` (single file, self-contained)
+- **File Size**: ~4 MB
+- **Platform**: macOS x64 / arm64
 
-## 安装方法
+## Installation
 
-### 方式一：直接下载
+### Option 1: Direct Download
 
-根据你的 Mac 芯片架构选择正确的版本：
+Choose the correct version based on your Mac chip architecture:
 
-**Apple Silicon (M1/M2/M3/M4)：**
+**Apple Silicon (M1/M2/M3/M4):**
 ```bash
 sudo cp et-arm64 /usr/local/bin/et
 sudo chmod +x /usr/local/bin/et
 ```
 
-**Intel Mac：**
+**Intel Mac:**
 ```bash
 sudo cp et-x64 /usr/local/bin/et
 sudo chmod +x /usr/local/bin/et
 ```
 
-**如何检测芯片架构：**
+**How to detect chip architecture:**
 ```bash
 uname -m
 # arm64 = Apple Silicon
 # x86_64 = Intel
 ```
 
-### 方式二：Homebrew 安装（推荐）
+### Option 2: Homebrew Installation (recommended)
 
 ```bash
-# 添加 tap（后续发布）
+# Add tap (coming soon)
 brew tap maomiaent/easytouch
 brew install easytouch
 ```
 
-### 方式三：从源码编译
+### Option 3: Build from Source
 
 ```bash
-# 克隆仓库
+# Clone the repository
 cd tools/EasyTouch/EasyTouch-Mac
 
 # Intel Mac (x64)
 dotnet publish -c Release -r osx-x64 --self-contained true -p:PublishAot=true
-# 输出: bin/Release/net10.0/osx-x64/publish/et
+# Output: bin/Release/net10.0/osx-x64/publish/et
 
 # Apple Silicon (arm64)
 dotnet publish -c Release -r osx-arm64 --self-contained true -p:PublishAot=true
-# 输出: bin/Release/net10.0/osx-arm64/publish/et
+# Output: bin/Release/net10.0/osx-arm64/publish/et
 
-# 构建通用二进制（可选，需要两个架构的二进制）
+# Build universal binary (optional, requires binaries for both architectures)
 lipo -create bin/Release/net10.0/osx-x64/publish/et \
              bin/Release/net10.0/osx-arm64/publish/et \
              -output et-universal
 ```
 
-## 集成到 MCP 客户端
+## MCP Client Integration
 
-### Claude Desktop 配置
+### Claude Desktop Configuration
 
-在 `claude_desktop_config.json` 中添加：
+Add the following to `claude_desktop_config.json`:
 
 ```json
 {
@@ -225,78 +225,78 @@ lipo -create bin/Release/net10.0/osx-x64/publish/et \
 }
 ```
 
-### 其他 MCP 客户端
+### Other MCP Clients
 
-配置命令为 `et`，参数为 `--mcp`，使用 stdio 传输。
+Configure the command as `et`, with `--mcp` as the argument, using stdio transport.
 
-## 权限设置
+## Permissions
 
-### 辅助功能权限
+### Accessibility Permission
 
-首次使用鼠标/键盘控制功能时，系统会提示授予辅助功能权限：
+When using mouse/keyboard control features for the first time, the system will prompt you to grant Accessibility permission:
 
-1. 打开 **系统设置** → **隐私与安全性** → **辅助功能**
-2. 点击 **+** 按钮
-3. 选择 **终端** 或你使用的应用
-4. 开启权限开关
+1. Open **System Settings** → **Privacy & Security** → **Accessibility**
+2. Click the **+** button
+3. Select **Terminal** or the app you are using
+4. Enable the permission toggle
 
-### 屏幕录制权限
+### Screen Recording Permission
 
-如果使用截图功能，需要授予屏幕录制权限：
+If you use the screenshot feature, you need to grant Screen Recording permission:
 
-1. 打开 **系统设置** → **隐私与安全性** → **屏幕录制**
-2. 添加 **终端** 或你使用的应用
+1. Open **System Settings** → **Privacy & Security** → **Screen Recording**
+2. Add **Terminal** or the app you are using
 
-## 注意事项
+## Notes
 
-1. **辅助功能权限**: 鼠标和键盘控制需要辅助功能权限，请在系统设置中授权
-2. **安全性**: macOS 的安全机制可能会阻止某些操作，请确保在受信任的环境中使用
-3. **芯片架构**: 
-   - Apple Silicon (M1/M2/M3/M4) 用户请使用 `et-arm64` 版本以获得最佳性能
-   - Intel Mac 用户请使用 `et-x64` 版本
-   - arm64 版本也可在 Apple Silicon 上通过 Rosetta 2 运行 x64 版本，但性能会有损失
-4. **沙盒**: 在沙盒环境中运行时部分功能可能受限
+1. **Accessibility Permission**: Mouse and keyboard control require Accessibility permission; please grant it in System Settings
+2. **Security**: macOS security mechanisms may block some operations; use only in trusted environments
+3. **Chip Architecture**: 
+   - Apple Silicon (M1/M2/M3/M4) users should use `et-arm64` for best performance
+   - Intel Mac users should use `et-x64`
+   - The arm64 version can also run the x64 version via Rosetta 2 on Apple Silicon, but with reduced performance
+4. **Sandbox**: Some features may be restricted when running in a sandboxed environment
 
-### 芯片架构兼容性
+### Chip Architecture Compatibility
 
-| 你的 Mac | 推荐版本 | 兼容版本 |
+| Your Mac | Recommended Version | Compatible Versions |
 |---------|---------|---------|
 | M4, M3, M2, M1 | et-arm64 | et-arm64, et-x64 (Rosetta 2) |
 | Intel Core i/i5/i7/i9 | et-x64 | et-x64 |
 
-**检测架构：**
+**Detect architecture:**
 ```bash
-# 终端运行
+# Run in Terminal
 uname -m
-# 输出 arm64 = Apple Silicon
-# 输出 x86_64 = Intel
+# Output arm64 = Apple Silicon
+# Output x86_64 = Intel
 ```
 
-## 故障排除
+## Troubleshooting
 
-### 命令无响应
-- 检查辅助功能权限：系统设置 → 隐私与安全性 → 辅助功能
-- 重启终端应用以应用权限更改
+### Command Not Responding
+- Check Accessibility permission: System Settings → Privacy & Security → Accessibility
+- Restart the Terminal app to apply permission changes
 
-### 截图失败
-- 检查屏幕录制权限：系统设置 → 隐私与安全性 → 屏幕录制
-- 确保输出目录可写
+### Screenshot Fails
+- Check Screen Recording permission: System Settings → Privacy & Security → Screen Recording
+- Ensure the output directory is writable
 
-### 权限错误
+### Permission Errors
 ```bash
-# 查看详细错误信息
+# View detailed error information
 et mouse_position 2>&1
 
-# 重置权限尝试
+# Reset permission attempt
 sudo tccutil reset All
 ```
 
-## 与其他自动化工具对比
+## Comparison with Other Automation Tools
 
-| 功能 | EasyTouch | AppleScript | Automator | Shortcuts |
+| Feature | EasyTouch | AppleScript | Automator | Shortcuts |
 |------|-----------|-------------|-----------|-----------|
-| CLI 支持 | ✅ | ⚠️ | ❌ | ❌ |
-| MCP 集成 | ✅ | ❌ | ❌ | ❌ |
-| 跨平台 | ✅ (W/L/M) | ❌ | ❌ | ❌ |
-| 学习曲线 | 低 | 高 | 中 | 低 |
-| 性能 | 高 | 中 | 中 | 中 |
+| CLI Support | ✅ | ⚠️ | ❌ | ❌ |
+| MCP Integration | ✅ | ❌ | ❌ | ❌ |
+| Cross-platform | ✅ (W/L/M) | ❌ | ❌ | ❌ |
+| Learning Curve | Low | High | Medium | Low |
+| Performance | High | Medium | Medium | Medium |

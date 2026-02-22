@@ -1,173 +1,173 @@
 # EasyTouch Windows MCP Skill
 
-## 基本信息
+## Basic Information
 
-- **名称**: EasyTouch Windows Automation
-- **版本**: 1.0.0
-- **描述**: Windows 系统自动化控制工具，支持鼠标、键盘、屏幕、窗口、系统资源等操作
-- **作者**: 痴者工良
-- **许可证**: MIT
+- **Name**: EasyTouch Windows Automation
+- **Version**: 1.0.0
+- **Description**: Windows system automation tool supporting mouse, keyboard, screen, window, and system resource operations
+- **Author**: Chizhe Gongliang
+- **License**: MIT
 
-## 功能特性
+## Features
 
-### 1. 鼠标控制
-- 移动鼠标到指定坐标（支持相对/绝对位置，平滑移动）
-- 鼠标点击（左/右/中键，支持双击）
-- 鼠标按下/释放
-- 鼠标滚轮滚动
-- 获取当前鼠标位置
+### 1. Mouse Control
+- Move mouse to specified coordinates (supports relative/absolute position, smooth movement)
+- Mouse click (left/right/middle button, supports double click)
+- Mouse press/release
+- Mouse wheel scroll
+- Get current mouse position
 
-### 2. 键盘控制
-- 按键按下和释放
-- 组合键操作
-- 文本输入（支持中文和模拟人类打字）
-- 独立的 key_down/key_up 操作
+### 2. Keyboard Control
+- Key press and release
+- Key combination operations
+- Text input (supports Unicode and simulated human typing)
+- Independent key_down/key_up operations
 
-### 3. 屏幕操作
-- 全屏/区域截图（PNG格式）
-- 获取指定像素颜色
-- 列出所有显示器
+### 3. Screen Operations
+- Full screen/region screenshot (PNG format)
+- Get color of a specified pixel
+- List all monitors
 
-### 4. 窗口管理
-- 列出所有窗口
-- 按标题/类名/PID查找窗口
-- 激活/最小化/最大化/关闭窗口
-- 获取前台窗口
-- 设置窗口置顶
+### 4. Window Management
+- List all windows
+- Find window by title/class name/PID
+- Activate/minimize/maximize/close windows
+- Get foreground window
+- Set window always-on-top
 
-### 5. 系统信息
-- 获取操作系统信息
-- CPU 信息和使用率
-- 内存使用情况
-- 磁盘信息
-- 进程列表和管理
+### 5. System Information
+- Get operating system information
+- CPU information and usage
+- Memory usage
+- Disk information
+- Process list and management
 
-### 6. 剪贴板操作
-- 获取/设置剪贴板文本
-- 获取剪贴板文件列表
-- 清空剪贴板
+### 6. Clipboard Operations
+- Get/set clipboard text
+- Get clipboard file list
+- Clear clipboard
 
-### 7. 音频控制
-- 获取/设置系统音量
-- 静音/取消静音
-- 列出音频设备
+### 7. Audio Control
+- Get/set system volume
+- Mute/unmute
+- List audio devices
 
-## 使用方式
+## Usage
 
-### CLI 命令行模式
+### CLI Mode
 
 ```bash
-# 鼠标操作
+# Mouse operations
 et mouse_move --x 100 --y 200
 et mouse_click --button left --double
 et mouse_position
 
-# 键盘操作
+# Keyboard operations
 et key_press --key "ctrl+c"
 et type_text --text "Hello World"
 
-# 截图
+# Screenshot
 et screenshot --output screenshot.png
 et pixel_color --x 100 --y 100
 
-# 窗口管理
+# Window management
 et window_list
 et window_activate --handle 123456
 
-# 系统信息
+# System information
 et os_info
 et cpu_info
 et memory_info
 et process_list
 
-# 剪贴板
+# Clipboard
 et clipboard_get_text
 et clipboard_set_text --text "Hello"
 
-# 音频
+# Audio
 et volume_set --level 50
 et volume_mute --state true
 ```
 
-### MCP 模式
+### MCP Mode
 
 ```bash
 et --mcp
 ```
 
-启动后通过 stdio 接收 MCP 协议的 JSON-RPC 请求。
+Once started, it receives MCP protocol JSON-RPC requests via stdio.
 
 ## MCP Tools
 
-| Tool | 描述 | 参数 |
+| Tool | Description | Parameters |
 |------|------|------|
-| `mouse_move` | 移动鼠标 | `x`, `y`, `relative`, `duration` |
-| `mouse_click` | 点击鼠标 | `button`, `double` |
-| `mouse_down` | 鼠标按下 | `button` |
-| `mouse_up` | 鼠标释放 | `button` |
-| `mouse_scroll` | 鼠标滚轮 | `amount`, `horizontal` |
-| `mouse_position` | 获取鼠标位置 | - |
-| `key_press` | 按下按键 | `key` |
-| `key_down` | 按键按下 | `key` |
-| `key_up` | 按键释放 | `key` |
-| `type_text` | 输入文本 | `text`, `interval`, `humanLike` |
-| `screenshot` | 截图 | `x`, `y`, `width`, `height`, `outputPath` |
-| `pixel_color` | 获取像素颜色 | `x`, `y` |
-| `screen_list` | 列出显示器 | - |
-| `window_list` | 列出窗口 | `visibleOnly`, `titleFilter` |
-| `window_find` | 查找窗口 | `title`, `className`, `processId` |
-| `window_activate` | 激活窗口 | `title`, `handle` |
-| `window_foreground` | 获取前台窗口 | - |
-| `window_minimize` | 最小化窗口 | `handle` |
-| `window_maximize` | 最大化窗口 | `handle` |
-| `window_close` | 关闭窗口 | `handle` |
-| `window_set_topmost` | 设置窗口置顶 | `handle`, `topmost` |
-| `os_info` | 操作系统信息 | - |
-| `cpu_info` | CPU 信息 | - |
-| `memory_info` | 内存信息 | - |
-| `disk_list` | 磁盘列表 | - |
-| `process_list` | 进程列表 | `nameFilter` |
-| `lock_screen` | 锁定屏幕 | - |
-| `clipboard_get_text` | 获取剪贴板文本 | - |
-| `clipboard_set_text` | 设置剪贴板文本 | `text` |
-| `clipboard_clear` | 清空剪贴板 | - |
-| `clipboard_get_files` | 获取剪贴板文件 | - |
-| `volume_get` | 获取音量 | - |
-| `volume_set` | 设置音量 | `level` |
-| `volume_mute` | 静音/取消静音 | `state` |
-| `audio_devices` | 列出音频设备 | - |
+| `mouse_move` | Move mouse | `x`, `y`, `relative`, `duration` |
+| `mouse_click` | Click mouse | `button`, `double` |
+| `mouse_down` | Mouse press | `button` |
+| `mouse_up` | Mouse release | `button` |
+| `mouse_scroll` | Mouse wheel | `amount`, `horizontal` |
+| `mouse_position` | Get mouse position | - |
+| `key_press` | Press key | `key` |
+| `key_down` | Key press | `key` |
+| `key_up` | Key release | `key` |
+| `type_text` | Type text | `text`, `interval`, `humanLike` |
+| `screenshot` | Take screenshot | `x`, `y`, `width`, `height`, `outputPath` |
+| `pixel_color` | Get pixel color | `x`, `y` |
+| `screen_list` | List monitors | - |
+| `window_list` | List windows | `visibleOnly`, `titleFilter` |
+| `window_find` | Find window | `title`, `className`, `processId` |
+| `window_activate` | Activate window | `title`, `handle` |
+| `window_foreground` | Get foreground window | - |
+| `window_minimize` | Minimize window | `handle` |
+| `window_maximize` | Maximize window | `handle` |
+| `window_close` | Close window | `handle` |
+| `window_set_topmost` | Set window always-on-top | `handle`, `topmost` |
+| `os_info` | OS information | - |
+| `cpu_info` | CPU information | - |
+| `memory_info` | Memory information | - |
+| `disk_list` | Disk list | - |
+| `process_list` | Process list | `nameFilter` |
+| `lock_screen` | Lock screen | - |
+| `clipboard_get_text` | Get clipboard text | - |
+| `clipboard_set_text` | Set clipboard text | `text` |
+| `clipboard_clear` | Clear clipboard | - |
+| `clipboard_get_files` | Get clipboard files | - |
+| `volume_get` | Get volume | - |
+| `volume_set` | Set volume | `level` |
+| `volume_mute` | Mute/unmute | `state` |
+| `audio_devices` | List audio devices | - |
 
-## 技术规格
+## Technical Specifications
 
-- **目标框架**: .NET 10
-- **编译方式**: AOT (Ahead-of-Time)
-- **输出文件**: `et.exe` (单文件，自包含)
-- **文件大小**: ~3.9 MB
-- **运行平台**: Windows 10/11 x64
+- **Target Framework**: .NET 10
+- **Compilation**: AOT (Ahead-of-Time)
+- **Output File**: `et.exe` (single file, self-contained)
+- **File Size**: ~3.9 MB
+- **Platform**: Windows 10/11 x64
 
-## 安装方法
+## Installation
 
-### 方式一：直接下载
-下载 `et.exe` 文件，放置到系统 PATH 目录或任意位置。
+### Option 1: Direct Download
+Download `et.exe` and place it in a directory on your system PATH or any location of your choice.
 
-### 方式二：从源码编译
+### Option 2: Build from Source
 
 ```bash
-# 克隆仓库
+# Clone the repository
 git clone <repository-url>
 cd tools/EasyTouch/EasyTouch-Windows
 
-# 构建（需要 .NET 10 SDK）
+# Build (requires .NET 10 SDK)
 dotnet publish EasyTouch-Windows.csproj -c Release -r win-x64 --self-contained true -p:PublishAot=true
 
-# 输出文件位于 bin/Release/net10.0/win-x64/publish/et.exe
+# Output file is at bin/Release/net10.0/win-x64/publish/et.exe
 ```
 
-## 集成到 MCP 客户端
+## MCP Client Integration
 
-### Claude Desktop 配置
+### Claude Desktop Configuration
 
-在 `claude_desktop_config.json` 中添加：
+Add the following to `claude_desktop_config.json`:
 
 ```json
 {
@@ -180,13 +180,13 @@ dotnet publish EasyTouch-Windows.csproj -c Release -r win-x64 --self-contained t
 }
 ```
 
-### 其他 MCP 客户端
+### Other MCP Clients
 
-配置命令为 `et.exe`，参数为 `--mcp`，使用 stdio 传输。
+Configure the command as `et.exe`, with `--mcp` as the argument, using stdio transport.
 
-## 注意事项
+## Notes
 
-1. **管理员权限**: 部分功能（如操作系统关机、某些窗口操作）可能需要以管理员权限运行
-2. **AOT 编译**: 单文件已包含所有依赖，无需安装 .NET 运行时
-3. **安全性**: 该工具可以控制系统，请确保只在受信任的环境中使用
-4. **兼容性**: 仅在 Windows 10/11 x64 上测试通过
+1. **Administrator Privileges**: Some features (such as OS shutdown, certain window operations) may require administrator privileges
+2. **AOT Compilation**: The single file includes all dependencies; no .NET runtime installation is required
+3. **Security**: This tool can control the system — use it only in trusted environments
+4. **Compatibility**: Tested on Windows 10/11 x64 only

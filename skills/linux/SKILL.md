@@ -1,44 +1,44 @@
 # EasyTouch Linux MCP Skill
 
-## 基本信息
+## Basic Information
 
-- **名称**: EasyTouch Linux Automation
-- **版本**: 1.0.0
-- **描述**: Linux 系统自动化控制工具，支持鼠标、键盘、屏幕、窗口、系统资源等操作
-- **作者**: MaomiAgent Team
-- **许可证**: MIT
+- **Name**: EasyTouch Linux Automation
+- **Version**: 1.0.0
+- **Description**: Linux system automation tool supporting mouse, keyboard, screen, window, and system resource operations
+- **Author**: MaomiAgent Team
+- **License**: MIT
 
-## 支持平台
+## Supported Platforms
 
 - Ubuntu 20.04+
 - Debian 10+
 - CentOS 8+
 - Fedora 32+
 - Arch Linux
-- 其他支持 X11 或 Wayland 的发行版
+- Other distributions supporting X11 or Wayland
 
-## 依赖要求
+## Dependencies
 
-### X11 环境
-- `xdotool` - 鼠标键盘控制
-- `xclip` 或 `xsel` - 剪贴板操作
-- `scrot` 或 `gnome-screenshot` - 截图
-- `wmctrl` - 窗口管理
+### X11 Environment
+- `xdotool` - Mouse and keyboard control
+- `xclip` or `xsel` - Clipboard operations
+- `scrot` or `gnome-screenshot` - Screenshots
+- `wmctrl` - Window management
 
-### Wayland 环境
-- `ydotool` - 鼠标键盘控制
-- `wl-clipboard` - 剪贴板操作
-- `grim` - 截图
+### Wayland Environment
+- `ydotool` - Mouse and keyboard control
+- `wl-clipboard` - Clipboard operations
+- `grim` - Screenshots
 
-### 音频控制
-- `alsa-utils` (amixer) 或 `pulseaudio-utils` (pactl) 或 `wireplumber` (wpctl)
+### Audio Control
+- `alsa-utils` (amixer) or `pulseaudio-utils` (pactl) or `wireplumber` (wpctl)
 
-安装依赖：
+Install dependencies:
 ```bash
 # Debian/Ubuntu
 sudo apt install xdotool xclip scrot wmctrl alsa-utils
 
-# 或 Wayland
+# Or Wayland
 sudo apt install ydotool wl-clipboard grim
 
 # Fedora
@@ -48,87 +48,87 @@ sudo dnf install xdotool xclip scrot wmctrl alsa-utils
 sudo pacman -S xdotool xclip scrot wmctrl alsa-utils
 ```
 
-## 功能特性
+## Features
 
-### 1. 鼠标控制
-- 移动鼠标到指定坐标（支持 X11 和 Wayland）
-- 鼠标点击（左/右/中键，支持双击）
-- 鼠标按下/释放
-- 鼠标滚轮滚动
-- 获取当前鼠标位置
+### 1. Mouse Control
+- Move mouse to specified coordinates (supports X11 and Wayland)
+- Mouse click (left/right/middle button, supports double click)
+- Mouse press/release
+- Mouse wheel scroll
+- Get current mouse position
 
-### 2. 键盘控制
-- 按键按下和释放
-- 组合键操作（Ctrl+C, Alt+Tab 等）
-- 文本输入（支持多语言）
-- 模拟人类打字
+### 2. Keyboard Control
+- Key press and release
+- Key combination operations (Ctrl+C, Alt+Tab, etc.)
+- Text input (supports multiple languages)
+- Simulated human typing
 
-### 3. 屏幕操作
-- 全屏/区域截图
-- 获取指定像素颜色
-- 列出所有显示器
+### 3. Screen Operations
+- Full screen/region screenshot
+- Get color of a specified pixel
+- List all monitors
 
-### 4. 窗口管理
-- 列出所有窗口
-- 按标题查找窗口
-- 激活窗口（仅限 X11）
-- 获取前台窗口
+### 4. Window Management
+- List all windows
+- Find window by title
+- Activate window (X11 only)
+- Get foreground window
 
-### 5. 系统信息
-- 获取操作系统信息
-- CPU 信息和使用率
-- 内存使用情况
-- 磁盘信息
-- 进程列表
+### 5. System Information
+- Get operating system information
+- CPU information and usage
+- Memory usage
+- Disk information
+- Process list
 
-### 6. 剪贴板操作
-- 获取/设置剪贴板文本
-- 获取剪贴板文件列表
-- 清空剪贴板
+### 6. Clipboard Operations
+- Get/set clipboard text
+- Get clipboard file list
+- Clear clipboard
 
-### 7. 音频控制
-- 获取/设置系统音量
-- 静音/取消静音
-- 列出音频设备
+### 7. Audio Control
+- Get/set system volume
+- Mute/unmute
+- List audio devices
 
-## 使用方式
+## Usage
 
-### CLI 命令行模式
+### CLI Mode
 
 ```bash
-# 鼠标操作
+# Mouse operations
 et mouse_move --x 100 --y 200
 et mouse_click --button left --double
 et mouse_position
 
-# 键盘操作
+# Keyboard operations
 et key_press --key "ctrl+c"
 et type_text --text "Hello World"
 
-# 截图
+# Screenshot
 et screenshot --output screenshot.png
 et pixel_color --x 100 --y 100
 
-# 窗口管理
+# Window management
 et window_list
 et window_activate --title "Firefox"
 
-# 系统信息
+# System information
 et os_info
 et cpu_info
 et memory_info
 et process_list
 
-# 剪贴板
+# Clipboard
 et clipboard_get_text
 et clipboard_set_text --text "Hello"
 
-# 音频
+# Audio
 et volume_set --level 50
 et volume_mute --state true
 ```
 
-### MCP 模式
+### MCP Mode
 
 ```bash
 et --mcp
@@ -136,74 +136,74 @@ et --mcp
 
 ## MCP Tools
 
-| Tool | 描述 | 参数 |
+| Tool | Description | Parameters |
 |------|------|------|
-| `mouse_move` | 移动鼠标 | `x`, `y`, `relative`, `duration` |
-| `mouse_click` | 点击鼠标 | `button`, `double` |
-| `mouse_down` | 鼠标按下 | `button` |
-| `mouse_up` | 鼠标释放 | `button` |
-| `mouse_scroll` | 鼠标滚轮 | `amount`, `horizontal` |
-| `mouse_position` | 获取鼠标位置 | - |
-| `key_press` | 按下按键 | `key` |
-| `key_down` | 按键按下 | `key` |
-| `key_up` | 按键释放 | `key` |
-| `type_text` | 输入文本 | `text`, `interval`, `humanLike` |
-| `screenshot` | 截图 | `x`, `y`, `width`, `height`, `outputPath` |
-| `pixel_color` | 获取像素颜色 | `x`, `y` |
-| `screen_list` | 列出显示器 | - |
-| `window_list` | 列出窗口 | `visibleOnly`, `titleFilter` |
-| `window_find` | 查找窗口 | `title`, `className`, `processId` |
-| `window_activate` | 激活窗口 | `handle` |
-| `window_foreground` | 获取前台窗口 | - |
-| `os_info` | 操作系统信息 | - |
-| `cpu_info` | CPU 信息 | - |
-| `memory_info` | 内存信息 | - |
-| `disk_list` | 磁盘列表 | - |
-| `process_list` | 进程列表 | `nameFilter` |
-| `lock_screen` | 锁定屏幕 | - |
-| `clipboard_get_text` | 获取剪贴板文本 | - |
-| `clipboard_set_text` | 设置剪贴板文本 | `text` |
-| `clipboard_clear` | 清空剪贴板 | - |
-| `clipboard_get_files` | 获取剪贴板文件 | - |
-| `volume_get` | 获取音量 | - |
-| `volume_set` | 设置音量 | `level` |
-| `volume_mute` | 静音/取消静音 | `state` |
-| `audio_devices` | 列出音频设备 | - |
+| `mouse_move` | Move mouse | `x`, `y`, `relative`, `duration` |
+| `mouse_click` | Click mouse | `button`, `double` |
+| `mouse_down` | Mouse press | `button` |
+| `mouse_up` | Mouse release | `button` |
+| `mouse_scroll` | Mouse wheel | `amount`, `horizontal` |
+| `mouse_position` | Get mouse position | - |
+| `key_press` | Press key | `key` |
+| `key_down` | Key press | `key` |
+| `key_up` | Key release | `key` |
+| `type_text` | Type text | `text`, `interval`, `humanLike` |
+| `screenshot` | Take screenshot | `x`, `y`, `width`, `height`, `outputPath` |
+| `pixel_color` | Get pixel color | `x`, `y` |
+| `screen_list` | List monitors | - |
+| `window_list` | List windows | `visibleOnly`, `titleFilter` |
+| `window_find` | Find window | `title`, `className`, `processId` |
+| `window_activate` | Activate window | `handle` |
+| `window_foreground` | Get foreground window | - |
+| `os_info` | OS information | - |
+| `cpu_info` | CPU information | - |
+| `memory_info` | Memory information | - |
+| `disk_list` | Disk list | - |
+| `process_list` | Process list | `nameFilter` |
+| `lock_screen` | Lock screen | - |
+| `clipboard_get_text` | Get clipboard text | - |
+| `clipboard_set_text` | Set clipboard text | `text` |
+| `clipboard_clear` | Clear clipboard | - |
+| `clipboard_get_files` | Get clipboard files | - |
+| `volume_get` | Get volume | - |
+| `volume_set` | Set volume | `level` |
+| `volume_mute` | Mute/unmute | `state` |
+| `audio_devices` | List audio devices | - |
 
-## 技术规格
+## Technical Specifications
 
-- **目标框架**: .NET 10
-- **编译方式**: AOT (Ahead-of-Time)
-- **输出文件**: `et` (单文件，自包含)
-- **文件大小**: ~4 MB
-- **运行平台**: Linux x64 (glibc 2.17+)
+- **Target Framework**: .NET 10
+- **Compilation**: AOT (Ahead-of-Time)
+- **Output File**: `et` (single file, self-contained)
+- **File Size**: ~4 MB
+- **Platform**: Linux x64 (glibc 2.17+)
 
-## 安装方法
+## Installation
 
-### 方式一：直接下载
-下载 `et` 文件，放置到系统 PATH 目录：
+### Option 1: Direct Download
+Download the `et` file and place it in a directory on your system PATH:
 ```bash
 sudo cp et /usr/local/bin/
 sudo chmod +x /usr/local/bin/et
 ```
 
-### 方式二：从源码编译
+### Option 2: Build from Source
 
 ```bash
-# 克隆仓库
+# Clone the repository
 cd tools/EasyTouch/EasyTouch-Linux
 
-# 构建（需要 .NET 10 SDK）
+# Build (requires .NET 10 SDK)
 dotnet publish -c Release -r linux-x64 --self-contained true -p:PublishAot=true
 
-# 输出文件位于 bin/Release/net10.0/linux-x64/publish/et
+# Output file is at bin/Release/net10.0/linux-x64/publish/et
 ```
 
-## 集成到 MCP 客户端
+## MCP Client Integration
 
-### Claude Desktop 配置
+### Claude Desktop Configuration
 
-在 `claude_desktop_config.json` 中添加：
+Add the following to `claude_desktop_config.json`:
 
 ```json
 {
@@ -216,33 +216,33 @@ dotnet publish -c Release -r linux-x64 --self-contained true -p:PublishAot=true
 }
 ```
 
-### 其他 MCP 客户端
+### Other MCP Clients
 
-配置命令为 `et`，参数为 `--mcp`，使用 stdio 传输。
+Configure the command as `et`, with `--mcp` as the argument, using stdio transport.
 
-## 注意事项
+## Notes
 
-1. **X11 vs Wayland**: Wayland 安全模型限制了部分功能（如窗口激活），工具会自动检测并使用适当的方法
-2. **权限**: 某些功能可能需要用户权限，建议在普通用户下运行
-3. **依赖**: 确保安装了相应的系统工具（xdotool/xclip 等）
-4. **兼容性**: 在纯 Wayland 环境下部分功能受限
+1. **X11 vs Wayland**: Wayland's security model restricts some features (such as window activation); the tool automatically detects and uses the appropriate method
+2. **Permissions**: Some features may require user permissions; running as a regular user is recommended
+3. **Dependencies**: Ensure the required system tools are installed (xdotool/xclip, etc.)
+4. **Compatibility**: Some features are limited in a pure Wayland environment
 
-## 已知限制
+## Known Limitations
 
-- **Wayland 窗口管理**: 由于安全限制，Wayland 不支持直接枚举和激活其他应用的窗口
-- **全局快捷键**: 无法通过工具模拟全局快捷键（需要窗口管理器支持）
-- **屏幕录制权限**: macOS 风格的屏幕录制权限管理可能会影响某些发行版
+- **Wayland Window Management**: Due to security restrictions, Wayland does not support directly enumerating and activating other applications' windows
+- **Global Shortcuts**: Cannot simulate global shortcuts via this tool (requires window manager support)
+- **Screen Recording Permissions**: macOS-style screen recording permission management may affect some distributions
 
-## 故障排除
+## Troubleshooting
 
-### 命令无响应
-- 检查依赖是否安装：`which xdotool`
-- 检查权限：确保当前用户有访问 X11/Wayland 的权限
+### Command Not Responding
+- Check that dependencies are installed: `which xdotool`
+- Check permissions: ensure the current user has access to X11/Wayland
 
-### 截图失败
-- 安装截图工具：`sudo apt install scrot` 或 `sudo apt install grim`
-- 检查文件权限：确保输出目录可写
+### Screenshot Fails
+- Install screenshot tool: `sudo apt install scrot` or `sudo apt install grim`
+- Check file permissions: ensure the output directory is writable
 
-### 音频控制失败
-- 检查音频系统：`pactl info` 或 `amixer`
-- 确保用户属于 audio 组：`sudo usermod -a -G audio $USER`
+### Audio Control Fails
+- Check audio system: `pactl info` or `amixer`
+- Ensure the user is in the audio group: `sudo usermod -a -G audio $USER`

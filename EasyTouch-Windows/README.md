@@ -1,366 +1,366 @@
 # EasyTouch-Windows (et)
 
-一个用于 Windows 系统自动化操作的工具，支持鼠标、键盘、屏幕、窗口、系统资源等多种操作。支持 CLI 和 MCP 两种使用方式。
+A tool for Windows system automation supporting mouse, keyboard, screen, window, and system resource operations. Supports both CLI and MCP usage modes.
 
-## 功能模块
+## Feature Modules
 
-### 1. 鼠标控制 (Mouse)
+### 1. Mouse Control (Mouse)
 
-| 命令 | 描述 |
+| Command | Description |
 |------|------|
-| `mouse_move` | 移动鼠标到指定坐标 (相对/绝对) |
-| `mouse_click` | 鼠标点击 (左/右/中键，单击/双击) |
-| `mouse_down` | 鼠标按下 |
-| `mouse_up` | 鼠标释放 |
-| `mouse_scroll` | 鼠标滚轮滚动 |
-| `mouse_position` | 获取当前鼠标位置 |
+| `mouse_move` | Move mouse to specified coordinates (relative/absolute) |
+| `mouse_click` | Mouse click (left/right/middle button, single/double click) |
+| `mouse_down` | Mouse button press |
+| `mouse_up` | Mouse button release |
+| `mouse_scroll` | Mouse wheel scroll |
+| `mouse_position` | Get current mouse position |
 
-### 2. 键盘控制 (Keyboard)
+### 2. Keyboard Control (Keyboard)
 
-| 命令 | 描述 |
+| Command | Description |
 |------|------|
-| `key_press` | 按键按下并释放 |
-| `key_down` | 按键按下 |
-| `key_up` | 按键释放 |
-| `type_text` | 输入文本字符串 (支持中文) |
+| `key_press` | Press and release a key |
+| `key_down` | Press a key |
+| `key_up` | Release a key |
+| `type_text` | Type a text string (supports Unicode) |
 
-### 3. 屏幕操作 (Screen)
+### 3. Screen Operations (Screen)
 
-| 命令 | 描述 |
+| Command | Description |
 |------|------|
-| `screenshot` | 截图 |
-| `pixel_color` | 获取指定像素颜色 |
-| `screen_list` | 列出所有显示器 |
+| `screenshot` | Take a screenshot |
+| `pixel_color` | Get color of a specified pixel |
+| `screen_list` | List all monitors |
 
-### 4. 窗口管理 (Window)
+### 4. Window Management (Window)
 
-| 命令 | 描述 |
+| Command | Description |
 |------|------|
-| `window_list` | 列出所有窗口 |
-| `window_find` | 查找窗口 |
-| `window_activate` | 激活窗口 |
-| `window_foreground` | 获取前台窗口 |
+| `window_list` | List all windows |
+| `window_find` | Find a window |
+| `window_activate` | Activate a window |
+| `window_foreground` | Get the foreground window |
 
-### 5. 系统信息 (System)
+### 5. System Information (System)
 
-| 命令 | 描述 |
+| Command | Description |
 |------|------|
-| `os_info` | 操作系统信息 |
-| `cpu_info` | CPU 信息 |
-| `memory_info` | 内存使用情况 |
-| `disk_list` | 磁盘列表 |
-| `process_list` | 进程列表 |
-| `lock_screen` | 锁定屏幕 |
+| `os_info` | Operating system information |
+| `cpu_info` | CPU information |
+| `memory_info` | Memory usage |
+| `disk_list` | Disk list |
+| `process_list` | Process list |
+| `lock_screen` | Lock the screen |
 
-### 6. 剪贴板 (Clipboard)
+### 6. Clipboard (Clipboard)
 
-| 命令 | 描述 |
+| Command | Description |
 |------|------|
-| `clipboard_get_text` | 获取剪贴板文本 |
-| `clipboard_set_text` | 设置剪贴板文本 |
-| `clipboard_clear` | 清空剪贴板 |
-| `clipboard_get_files` | 获取剪贴板文件列表 |
+| `clipboard_get_text` | Get clipboard text |
+| `clipboard_set_text` | Set clipboard text |
+| `clipboard_clear` | Clear clipboard |
+| `clipboard_get_files` | Get clipboard file list |
 
-### 7. 音频控制 (Audio)
+### 7. Audio Control (Audio)
 
-| 命令 | 描述 |
+| Command | Description |
 |------|------|
-| `volume_get` | 获取当前音量 |
-| `volume_set` | 设置音量 |
-| `volume_mute` | 静音/取消静音 |
-| `audio_devices` | 列出音频设备 |
+| `volume_get` | Get current volume |
+| `volume_set` | Set volume |
+| `volume_mute` | Mute/unmute |
+| `audio_devices` | List audio devices |
 
-## CLI 命令行模式
+## CLI Mode
 
-### 基本用法
+### Basic Usage
 
 ```bash
 et <command> [options]
 ```
 
-### 鼠标控制
+### Mouse Control
 
-**移动鼠标**
+**Move Mouse**
 ```bash
-# 绝对位置
+# Absolute position
 et mouse_move --x 100 --y 200
 
-# 相对位置
+# Relative position
 et mouse_move --x 50 --y -30 --relative
 
-# 平滑移动（模拟人类操作）
+# Smooth move (simulates human movement)
 et mouse_move --x 100 --y 200 --duration 500
 ```
 
-**鼠标点击**
+**Mouse Click**
 ```bash
-# 左键单击
+# Left single click
 et mouse_click
 
-# 左键双击
+# Left double click
 et mouse_click --double
 
-# 右键单击
+# Right click
 et mouse_click --button right
 
-# 中键单击
+# Middle click
 et mouse_click --button middle
 ```
 
-**鼠标滚轮**
+**Mouse Scroll**
 ```bash
-# 向上滚动3格
+# Scroll up 3 steps
 et mouse_scroll --amount 3
 
-# 向下滚动3格
+# Scroll down 3 steps
 et mouse_scroll --amount -3
 
-# 水平滚动
+# Horizontal scroll
 et mouse_scroll --amount 3 --horizontal
 ```
 
-**获取鼠标位置**
+**Get Mouse Position**
 ```bash
 et mouse_position
 ```
 
-### 键盘控制
+### Keyboard Control
 
-**按键**
+**Key Press**
 ```bash
-# 按下单个键
+# Press a single key
 et key_press --key "a"
 et key_press --key "enter"
 et key_press --key "esc"
 
-# 组合键
+# Key combinations
 et key_press --key "ctrl+c"
 et key_press --key "ctrl+v"
 et key_press --key "alt+tab"
 et key_press --key "win+d"
 ```
 
-**输入文本**
+**Type Text**
 ```bash
-# 普通文本
+# Plain text
 et type_text --text "Hello World"
 
-# 中文文本
-et type_text --text "你好，世界！"
+# Unicode text
+et type_text --text "Hello, World!"
 
-# 模拟人类打字（带随机间隔）
+# Simulate human typing (with random intervals)
 et type_text --text "Hello World" --human --interval 50
 ```
 
-### 屏幕操作
+### Screen Operations
 
-**截图**
+**Screenshot**
 ```bash
-# 全屏截图
+# Full screen screenshot
 et screenshot --output screenshot.png
 
-# 区域截图
+# Region screenshot
 et screenshot --x 100 --y 100 --width 800 --height 600 --output region.png
 
-# 截图到剪贴板（不保存文件）
+# Screenshot to clipboard (no file saved)
 et screenshot
 ```
 
-**获取像素颜色**
+**Get Pixel Color**
 ```bash
 et pixel_color --x 100 --y 200
 ```
 
-**列出显示器**
+**List Monitors**
 ```bash
 et screen_list
 ```
 
-### 窗口管理
+### Window Management
 
-**列出窗口**
+**List Windows**
 ```bash
-# 列出所有可见窗口
+# List all visible windows
 et window_list
 
-# 列出所有窗口（包括隐藏）
+# List all windows (including hidden)
 et window_list --visible-only false
 
-# 按标题过滤
+# Filter by title
 et window_list --filter "Chrome"
 ```
 
-**查找窗口**
+**Find Window**
 ```bash
-# 按标题查找
-et window_find --title "记事本"
+# Find by title
+et window_find --title "Notepad"
 
-# 按类名查找
+# Find by class name
 et window_find --class "Notepad"
 
-# 按进程ID查找
+# Find by process ID
 et window_find --pid 1234
 ```
 
-**激活窗口**
+**Activate Window**
 ```bash
-# 通过标题激活
-et window_activate --title "记事本"
+# Activate by title
+et window_activate --title "Notepad"
 
-# 通过窗口句柄激活
+# Activate by window handle
 et window_activate --handle 123456
 ```
 
-**获取前台窗口**
+**Get Foreground Window**
 ```bash
 et window_foreground
 ```
 
-### 系统信息
+### System Information
 
-**操作系统信息**
+**OS Information**
 ```bash
 et os_info
 ```
 
-**CPU 信息**
+**CPU Information**
 ```bash
 et cpu_info
 ```
 
-**内存信息**
+**Memory Information**
 ```bash
 et memory_info
 ```
 
-**磁盘信息**
+**Disk Information**
 ```bash
 et disk_list
 ```
 
-**进程列表**
+**Process List**
 ```bash
-# 列出所有进程
+# List all processes
 et process_list
 
-# 按名称过滤
+# Filter by name
 et process_list --filter "chrome"
 ```
 
-**锁定屏幕**
+**Lock Screen**
 ```bash
 et lock_screen
 ```
 
-### 剪贴板操作
+### Clipboard Operations
 
-**获取剪贴板文本**
+**Get Clipboard Text**
 ```bash
 et clipboard_get_text
 ```
 
-**设置剪贴板文本**
+**Set Clipboard Text**
 ```bash
 et clipboard_set_text --text "Hello World"
 ```
 
-**清空剪贴板**
+**Clear Clipboard**
 ```bash
 et clipboard_clear
 ```
 
-**获取剪贴板文件列表**
+**Get Clipboard File List**
 ```bash
 et clipboard_get_files
 ```
 
-### 音频控制
+### Audio Control
 
-**获取音量**
+**Get Volume**
 ```bash
 et volume_get
 ```
 
-**设置音量**
+**Set Volume**
 ```bash
 et volume_set --level 50
 ```
 
-**静音/取消静音**
+**Mute/Unmute**
 ```bash
-# 静音
+# Mute
 et volume_mute --state true
 
-# 取消静音
+# Unmute
 et volume_mute --state false
 ```
 
-**列出音频设备**
+**List Audio Devices**
 ```bash
 et audio_devices
 ```
 
-## MCP 模式
+## MCP Mode
 
-### stdio 模式
+### stdio Mode
 ```bash
 et --mcp
 ```
 
-启动后通过 stdio 接收 MCP 协议的 JSON-RPC 请求。
+Once started, it receives MCP protocol JSON-RPC requests via stdio.
 
 ### MCP Tools
 
-| Tool | 描述 | 参数 |
+| Tool | Description | Parameters |
 |------|------|------|
-| `mouse_move` | 移动鼠标 | `x`, `y`, `relative`, `duration` |
-| `mouse_click` | 点击鼠标 | `button`, `double` |
-| `mouse_position` | 获取鼠标位置 | - |
-| `key_press` | 按下按键 | `key` |
-| `type_text` | 输入文本 | `text`, `interval`, `humanLike` |
-| `screenshot` | 截图 | `x`, `y`, `width`, `height`, `outputPath` |
-| `pixel_color` | 获取像素颜色 | `x`, `y` |
-| `window_list` | 列出窗口 | `visibleOnly`, `titleFilter` |
-| `window_find` | 查找窗口 | `title`, `className`, `processId` |
-| `window_activate` | 激活窗口 | `handle` |
-| `system_info` | 系统信息 | - |
-| `process_list` | 进程列表 | `nameFilter` |
-| `clipboard_get_text` | 获取剪贴板 | - |
-| `clipboard_set_text` | 设置剪贴板 | `text` |
-| `volume_get` | 获取音量 | - |
-| `volume_set` | 设置音量 | `level` |
+| `mouse_move` | Move mouse | `x`, `y`, `relative`, `duration` |
+| `mouse_click` | Click mouse | `button`, `double` |
+| `mouse_position` | Get mouse position | - |
+| `key_press` | Press key | `key` |
+| `type_text` | Type text | `text`, `interval`, `humanLike` |
+| `screenshot` | Take screenshot | `x`, `y`, `width`, `height`, `outputPath` |
+| `pixel_color` | Get pixel color | `x`, `y` |
+| `window_list` | List windows | `visibleOnly`, `titleFilter` |
+| `window_find` | Find window | `title`, `className`, `processId` |
+| `window_activate` | Activate window | `handle` |
+| `system_info` | System information | - |
+| `process_list` | Process list | `nameFilter` |
+| `clipboard_get_text` | Get clipboard | - |
+| `clipboard_set_text` | Set clipboard | `text` |
+| `volume_get` | Get volume | - |
+| `volume_set` | Set volume | `level` |
 
-## 技术规格
+## Technical Specifications
 
-- **目标框架**: .NET 10
-- **编译方式**: AOT (Ahead-of-Time)
-- **输出文件**: `et.exe` (单文件，自包含)
-- **文件大小**: ~3.9 MB
-- **运行平台**: Windows 10/11 x64
+- **Target Framework**: .NET 10
+- **Compilation**: AOT (Ahead-of-Time)
+- **Output File**: `et.exe` (single file, self-contained)
+- **File Size**: ~3.9 MB
+- **Platform**: Windows 10/11 x64
 
-## 安装方法
+## Installation
 
-### 方式一：直接下载
-下载 `et.exe` 文件，放置到系统 PATH 目录或任意位置。
+### Option 1: Direct Download
+Download `et.exe` and place it in a directory on your system PATH or any location of your choice.
 
-### 方式二：从源码编译
+### Option 2: Build from Source
 
 ```bash
-# 克隆仓库
+# Clone the repository
 git clone <repository-url>
 cd tools/EasyTouch/EasyTouch-Windows
 
-# 构建（需要 .NET 10 SDK）
+# Build (requires .NET 10 SDK)
 dotnet publish EasyTouch-Windows.csproj -c Release -r win-x64 --self-contained true -p:PublishAot=true
 
-# 输出文件位于 bin/Release/net10.0/win-x64/publish/et.exe
+# Output file is at bin/Release/net10.0/win-x64/publish/et.exe
 ```
 
-## 集成到 MCP 客户端
+## MCP Client Integration
 
-### Claude Desktop 配置
+### Claude Desktop Configuration
 
-在 `claude_desktop_config.json` 中添加：
+Add the following to `claude_desktop_config.json`:
 
 ```json
 {
@@ -373,17 +373,17 @@ dotnet publish EasyTouch-Windows.csproj -c Release -r win-x64 --self-contained t
 }
 ```
 
-### 其他 MCP 客户端
+### Other MCP Clients
 
-配置命令为 `et.exe`，参数为 `--mcp`，使用 stdio 传输。
+Configure the command as `et.exe`, with `--mcp` as the argument, using stdio transport.
 
-## 注意事项
+## Notes
 
-1. **管理员权限**: 部分功能（如操作系统关机、某些窗口操作）可能需要以管理员权限运行
-2. **AOT 编译**: 单文件已包含所有依赖，无需安装 .NET 运行时
-3. **安全性**: 该工具可以控制系统，请确保只在受信任的环境中使用
-4. **兼容性**: 仅在 Windows 10/11 x64 上测试通过
+1. **Administrator Privileges**: Some features (such as OS shutdown, certain window operations) may require administrator privileges
+2. **AOT Compilation**: The single file includes all dependencies; no .NET runtime installation is required
+3. **Security**: This tool can control the system — use it only in trusted environments
+4. **Compatibility**: Tested on Windows 10/11 x64 only
 
-## 许可证
+## License
 
 MIT License
