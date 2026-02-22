@@ -1,70 +1,70 @@
 # EasyTouch macOS
 
-## 芯片架构说明
+## Chip Architecture Guide
 
-macOS 版本支持两种芯片架构：
+The macOS version supports two chip architectures:
 
-### 📦 文件说明
+### 📦 File Description
 
-- **et-x64** - Intel Mac 版本（兼容 Apple Silicon via Rosetta 2）
-- **et-arm64** - Apple Silicon 原生版本（M1/M2/M3/M4）
-- **SKILL.md** - 完整使用文档
+- **et-x64** - Intel Mac version (compatible with Apple Silicon via Rosetta 2)
+- **et-arm64** - Apple Silicon native version (M1/M2/M3/M4)
+- **SKILL.md** - Full usage documentation
 
-### 🔍 如何选择正确的版本
+### 🔍 How to Choose the Right Version
 
-**方法 1：使用终端检测**
+**Method 1: Use Terminal to detect**
 ```bash
 uname -m
 ```
-- 输出 `arm64` → 使用 `et-arm64`
-- 输出 `x86_64` → 使用 `et-x64`
+- Output `arm64` → use `et-arm64`
+- Output `x86_64` → use `et-x64`
 
-**方法 2：查看关于本机**
-1. 点击左上角苹果菜单 → 关于本机
-2. 查看芯片信息
-   - 显示 "Apple M1/M2/M3/M4" → 使用 `et-arm64`
-   - 显示 "Intel" → 使用 `et-x64`
+**Method 2: Check About This Mac**
+1. Click the Apple menu in the upper-left corner → About This Mac
+2. Check the chip information
+   - Shows "Apple M1/M2/M3/M4" → use `et-arm64`
+   - Shows "Intel" → use `et-x64`
 
-### 🚀 安装方法
+### 🚀 Installation
 
-**Apple Silicon (推荐)：**
+**Apple Silicon (recommended):**
 ```bash
 sudo cp et-arm64 /usr/local/bin/et
 sudo chmod +x /usr/local/bin/et
 ```
 
-**Intel Mac：**
+**Intel Mac:**
 ```bash
 sudo cp et-x64 /usr/local/bin/et
 sudo chmod +x /usr/local/bin/et
 ```
 
-### ⚡ 性能提示
+### ⚡ Performance Tips
 
-- **Apple Silicon 用户**：强烈推荐使用 `et-arm64` 版本，性能更好，功耗更低
-- **通用二进制**：如果需要同时支持两种架构，可以使用 `lipo` 创建通用二进制（体积会增加）
+- **Apple Silicon users**: Strongly recommended to use `et-arm64` for better performance and lower power consumption
+- **Universal binary**: If you need to support both architectures, you can use `lipo` to create a universal binary (file size will increase)
 
-### 🔄 Rosetta 2 兼容性
+### 🔄 Rosetta 2 Compatibility
 
-Apple Silicon Mac 可以通过 Rosetta 2 运行 `et-x64` 版本，但会有轻微性能损失。如果不确定芯片类型，`et-x64` 是最安全的选择（兼容性最好）。
+Apple Silicon Macs can run `et-x64` via Rosetta 2, but with slight performance loss. If you are unsure of your chip type, `et-x64` is the safest choice (best compatibility).
 
-### 📋 故障排除
+### 📋 Troubleshooting
 
-**"无法打开，因为无法验证开发者"**
+**"Cannot be opened because the developer cannot be verified"**
 ```bash
-# 解决方法 1：右键点击 -> 打开
-# 解决方法 2：移除隔离属性
+# Solution 1: Right-click -> Open
+# Solution 2: Remove quarantine attribute
 xattr -d com.apple.quarantine /usr/local/bin/et
 ```
 
-**"架构不匹配" 错误**
+**"Architecture mismatch" error**
 ```bash
-# 说明你下载了错误架构的版本
-# 请重新下载对应架构的版本
+# This means you downloaded the wrong architecture version
+# Please re-download the version matching your architecture
 ```
 
-### 🔗 相关链接
+### 🔗 Related Links
 
-- 完整文档：SKILL.md
-- 项目主页：https://github.com/maomiaent/easytouch
-- 问题反馈：https://github.com/maomiaent/easytouch/issues
+- Full documentation: SKILL.md
+- Project homepage: https://github.com/maomiaent/easytouch
+- Issue reporting: https://github.com/maomiaent/easytouch/issues
